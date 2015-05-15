@@ -1,0 +1,395 @@
+body{
+    width: 100%;
+    height: 100%;
+    background: rgb(73, 99, 145);
+}
+
+.bg {
+    background-image: -moz-linear-gradient( 90deg, rgb(70,117,177) 0%, rgb(78,74,101) 100%);
+    background-image: -webkit-linear-gradient( top, rgb(70,117,177), rgb(78,74,101));
+    background-image: -ms-linear-gradient( 90deg, rgb(70,117,177) 0%, rgb(78,74,101) 100%);
+    background-size: contain;
+    background-position: 50%;
+    width: 100%;
+    /*height: 667px;*/
+}
+
+/*时钟*/
+.timeBox {
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    height: 48px;
+    background-color: rgb(77, 79, 110);
+}
+
+.timeBox .wrap {
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    width: 60%;
+    margin: 0 auto;
+    height: 52px;
+    background-color: rgb(77, 79, 110);
+    position: relative;
+}
+
+.timeBox .wrap:before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-left: 1px solid rgba(255,255,255,.1);
+    top: 45px;
+    left: -3px;
+    background-color: rgb(77, 79, 110);
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    z-index: 0;
+}
+
+.timeBox .wrap:after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid rgba(255,255,255,.1);
+    top: 45px;
+    right: -3px;
+    background-color: rgb(77, 79, 110);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    z-index: 0;
+}
+
+.timeBox .time {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,.4);
+    height: 46px;
+    margin: 0 auto;
+    background-color: rgba(255,255,255,.1);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-top: none;
+    position: relative;
+    z-index: 1;
+    /*text*/
+    color: #ffee16;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+}
+
+.timeBox .time .point{
+    opacity: 1;
+}
+
+.timeBox .time .point.on{
+    opacity: 0;
+}
+
+
+/*用户卡片*/
+.userCardBox{
+    width: 100%;
+    height: 102px;
+    position: relative;
+}
+.userCard{
+    width: 94%;
+    height: 100px;
+    border: 1px solid rgba(255,255,255,0);
+    background-color: rgba(255,255,255,.1);
+    margin: 16px auto 0;
+    border-radius: 90px;
+    -webkit-border-radius: 90px;
+    background-image: -moz-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);
+    box-shadow: 0px 1px 3px 0px rgba( 0, 0, 0 ,.2);
+    z-index: 1;
+    position: relative;
+}
+
+.userCardLightShadow{
+    position: absolute;
+    left: -1px;
+    top: -15px;
+    width: 100%;
+    height: 100px;
+    border: 1px solid rgba(255,255,255,0);
+    background-color: rgba(0,0,0,.1);
+    margin: 16px auto 0;
+    border-radius: 90px;
+    -webkit-border-radius: 90px;
+    /*background-image: -moz-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgba(170,170,170,.1) 0%, rgba(238,238,238,.1) 17%, rgba(255,255,255,.1) 100%);*/
+    z-index: 0;
+    box-shadow: 0 -2px 0 rgba(255,255,255,.2);
+}
+
+/*用户头像*/
+.userCard .userWrap {
+    width: 78px;
+    height: 78px;
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    border: 3px solid rgba(255, 255, 255, 0.58);
+}
+
+.userCard .userWrapLightShadow {
+    width: 78px;
+    height: 78px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.userCard .userWrap .userLogo {
+    width: 78px;
+    height: 78px;
+    position: relative;
+    margin: 0 auto;
+    top: 0;
+    box-shadow: inset 0 2px 2px 0 rgba(0,0,0,.2);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.userCard .userWrap .userLogoLightShadow {
+    width: 84px;
+    height: 84px;
+    background-color: rgba(126, 199, 62, 0);
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    box-shadow: inset 0 2px 2px 0 rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+.userCard .userLogo img{
+    width: 100%;
+    opacity: 0.8;
+}
+
+/*用户名及天气*/
+.userCard .userNameWeather {
+    width: 38%;
+    height: 50px;
+    /*border: 1px solid;*/
+    position: absolute;
+    top: 28px;
+    left: 104px;
+}
+
+.userCardBox .userCard .userName {
+    color: rgba(255,255,255,.8);
+}
+
+.userCard .userNameWeather .dateWeather {
+    margin: 8px 0 0;
+    color: rgba(255,255,255,.8);
+}
+
+.userCard .userNameWeather .dateWeather .weather,
+.userCard .userNameWeather .dateWeather .weather .text {
+    margin: 0 0 0 4px;
+}
+
+header .locateNav.myul {
+    /* border: 1px solid; */
+    height: 70px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+header .locateNav.myul .myli:first-child {
+    border-right: 1px solid rgba(255,255,255,.1);
+}
+
+header .locateNav.myul .myli {
+    padding: 16px 0 0;
+    color: rgba(255,255,255,.6);
+}
+
+header .locateNav.myul .myli .time {
+    color: rgba(255,255,255,.8);
+}
+
+header .locateNav.myul .myli .text {
+    color: rgba(255,255,255,.4);
+}
+
+header .locateNav.myul .myli .text.location {
+    color: rgba(255,255,255,.6);
+    margin: 6px 0 0;
+}
+
+/* 打卡圆 */
+.userCard .circleWrap {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.08);
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    box-shadow: inset 0 2px 2px 0 rgba(0,0,0,.2);
+    z-index: 3;
+}
+
+.userCard .circleWrapLightShadow {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-shadow: 0 2px 2px 0 rgba(255,255,255,.1);
+}
+
+.userCard .circleWrap .checkIn {
+    width: 56px;
+    height: 56px;
+    background-color: #7ec73e;
+    position: relative;
+    margin: 0 auto;
+    top: 7px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.2);
+    background-image: -moz-linear-gradient( 90deg, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
+    text-align: center;
+    line-height: 56px;
+    font-weight: 600;
+    color: rgba(255,255,255,.8);
+    text-shadow: 0 0 2px rgba(0,0,0,.4);
+    font-size: 18px;
+}
+
+.userCard .circleWrap .checkInLightShadow {
+    width: 56px;
+    height: 56px;
+    background-color: rgba(126, 199, 62, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: inset 0 2px 2px 0 rgba(255,255,255,.4);
+}
+
+/*表格*/
+.content {
+    width: 100%;
+    position: relative;
+    height: 620px;
+    overflow: hidden;
+}
+
+.content .header {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    height: 32px;
+    line-height: 32px;
+    background-color: rgba(0,0,0,.2);
+}
+
+.col1 {
+    width: 30%;
+}
+
+.col2 {
+    width: 34%;
+}
+
+.col.col2 {
+    border-left: 1px solid rgba(255,255,255,.1);
+}
+
+.content .box {
+    width: 100%;
+    height: 100%;
+    /*position: absolute;*/
+    overflow: hidden;
+    /* border-bottom:1px solid ;
+     height: 180px;*/}
+
+.content .box .scroll{
+    width: 100%;
+    /*position: absolute;*/
+}
+
+.box .item {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    height: 94px;
+    line-height: 94px;
+    color: #fff;
+}
+
+.box .item:first-child{
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.box .item .userLogo {
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    /* border: 1px solid; */
+    line-height: normal;
+    margin: 6px auto 0;
+    position: relative;
+}
+
+.box .item .userLogo img {
+    width: 100%;
+}
+
+.box .item .userWrap {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    margin: 0 auto;
+    top: 8px;
+    line-height: normal;
+}
+
+.box .item .col.col1 {
+    line-height: normal;
+}
+
+.box .item .col.col1 .text{
+    color: rgba(255,255,255,.6);
+    position: relative;
+    top: -2px;
+
+}
+
+.box .item .userWrap .num {
+    background-color: #f99e1c;
+    text-align: center;
+    height: 14px;
+    line-height: 16px;
+    padding: 1px 5px;
+    font-size: 10px;
+    position: absolute;
+    bottom: 14px;
+    right: 10px;
+}
+
+
+/*打卡器*/
+#checkIner{
+    background-color: #fff;
+    position: fixed;
+    bottom: -400px;
+    left: 0;
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
+
+}
