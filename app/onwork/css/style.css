@@ -393,3 +393,21 @@ header .locateNav.myul .myli .text.location {
     box-shadow: 0 0 8px rgba(0,0,0,.2);
 
 }
+
+#checkIner .title{
+    margin: 32px 0 0;
+    color: rgba(0,0,0,.6);
+}
+
+#checkIner .printBox{
+    width: 30%;
+    height: 30%;
+    position: relative;
+    margin: 32px auto;
+    -webkit-touch-callout:none;
+}
+
+#checkIner .printBox img{
+    width: 100%;
+
+}
