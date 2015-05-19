@@ -8,61 +8,85 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 * 初始化程序
 * */
 function initOnWork(){
-    new myDate().time();
+    myDate(); //日期
+    weather();//天气
     fH("body>.content");
+
     scroll(".box");
     checkIner("#checkIner");//初始化打卡器大小
     checkInerAct();//打卡器操作
+    blurAct(function(){
+        if($("#checkIner").hasClass("bluring")){
+            if($("#checkIner").hasClass("__checking__")){
+                return;
+            }
+            checkInerOut("#checkIner");
+        };
+        if($(".fMenu").hasClass("bluring")){
+            $(".fMenu").trigger("touchend");
+        }
+    });
+
 }
 initOnWork();//初始化
- /*
-* 时钟
-* */
-function myDate(){
-    myDate.prototype.time = function(opt){
-        if(typeof opt =="undefined"){
-            opt={
-                h:".hh",
-                m:".mm",
-                s:".ss",
-                p :".time .point"
-            };
-        }
-        function addZero(num){
-            return num = num<10?"0"+num:num;
-        }
 
-        /*
-         * 获取时间
-         * */
-        function getTime(){
-            var date = new Date(),
-                h = date.getHours(),
-                m = date.getMinutes(),
-                s = date.getSeconds();
-            return {
-                "h":addZero(h),
-                "m":addZero(m),
-                "s":addZero(s)
-            }
+
+/* 时钟
+* */
+function myDate(opt){
+    if(typeof opt =="undefined"){
+        opt={
+            h:".hh",
+            m:".mm",
+            s:".ss",
+            p :".time .point",
+            day : ".dateWeather .date"
+        };
+    }
+    function addZero(num){
+        return num = num<10?"0"+num:num;
+    }
+
+    /*
+     * 获取时间
+     * */
+    function getTime(){
+        var date = new Date(),
+            h = date.getHours(),
+            m = date.getMinutes(),
+            s = date.getSeconds();
+
+        return {
+            "h":addZero(h),
+            "m":addZero(m),
+            "s":addZero(s)
         }
-        function setTimeHtml(){
-            $(opt.h).html(getTime().h);
-            $(opt.m).html(getTime().m);
-            $(opt.s).html(getTime().s);
-        }
+    }
+    function setTimeHtml(){
+        $(opt.h).html(getTime().h);
+        $(opt.m).html(getTime().m);
+        $(opt.s).html(getTime().s);
+    }
+
+    /*设置日期*/
+    function setDate(){
+        var date = new Date();
+        var day = addZero(date.getFullYear())+"-"+
+                  addZero(date.getMonth()+1)+"-"+
+                  addZero(date.getDate());
+//            console.log(day);
+           $(function(){ $(opt.day).html(day);})
+    }
+    var stinit = setInterval(function(){
         setTimeHtml();
-        var stinit = setInterval(function(){
-            //            console.log("stinit:"+stinit);
-            setTimeHtml();
-            clearInterval(stinit);
-        },0);
-        var st = setInterval(function(){
-            //            console.log("st:"+st)
-            setTimeHtml();
-        },1000)
-    };
-};
+        setDate();
+        clearInterval(stinit);
+    },0);
+    var st = setInterval(function(){
+        setTimeHtml();
+    },1000)
+
+}
 
 /*
 *滑动改变
@@ -159,6 +183,7 @@ $(function(){
 function fH(obj){
     $(function(){
         var h = $(obj).offset().top;
+//        console.log(h)
         h = $(window).height()-h;
         $(obj).height(h);
     })
@@ -167,7 +192,7 @@ function fH(obj){
 function scroll(obj){
     seajs.use(["iscroll"],function(){
         fH(obj);
-        $(".iScrollLoneScrollbar").remove();
+        $(obj).find(".iScrollLoneScrollbar").remove();
         var onworkScroll = new IScroll(obj, {
             scrollX: true ,
             scrollbars:true,
@@ -196,8 +221,43 @@ function cBox(){
         b:bottom
     }
 }
+
+function blur(){
+   $(function(){
+       var blur = '<div id="__blur__"></div>';
+       $("body").append(blur);
+       $("#__blur__").css({
+           "position":"fixed",
+           "top":"0",
+           "left":"0",
+           "width":"100%",
+           "height":"100%",
+           "z-index":"8"
+       })
+   })
+}
+
+function noBlur(){
+    $(function(){
+        $("#__blur__").remove();
+
+    })
+}
+
+function blurAct(callback){
+    $(document).on("touchend","#__blur__",function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        if(typeof callback === "function"){
+            callback();
+        }
+    })
+}
+
 /*打卡器出来*/
 function checkInerIn(obj,num){
+    blur();
+    $(obj).addClass("bluring");
     if(typeof num == "undefined"){
         num = 1000
     }
@@ -207,12 +267,14 @@ function checkInerIn(obj,num){
 }
 /*打卡器消失*/
 function checkInerOut(obj,num){
+    $(obj).removeClass("bluring");
     if(typeof num == "undefined"){
         num = 1000
     }
     $(obj).animate({
         "bottom":(-cBox().h)
-    },num,"easeOutElastic")
+    },num,"easeOutElastic");
+   noBlur();
 }
 /*
 * 打卡器大小*/
@@ -222,25 +284,172 @@ function checkIner(obj){
             "height":cBox().h,
             "width":cBox().w,
             "left":cBox().l,
-            "bottom":-cBox().h
+            "bottom":-cBox().h,
+            "z-index":"9"
         })
-/*
-        setTimeout(function(){
-            checkInerIn(obj);
-            checkInerOut(obj);
-        },1000)*/
     })
 }
 
 /*
 * 打卡器操作*/
-function checkInerAct(){
+function checkTip(str){
+    $("#checkIner .title").html(str);
+};
+ function checkInerAct(){
     $(function(){
-        $(".checkWrap").click(function(){
-            checkInerIn("#checkIner");
-        })
-        $("#checkIner").click(function(){
-            checkInerOut("#checkIner");
-        })
+        $(".checkWrap").on("touchstart",function(){
+            $(this).off("touchend");
+            $(this).addClass("on");
+            $(this).on("touchend",function(){
+                $(this).removeClass("on");
+                checkInerIn("#checkIner");
+            })
+        });
+
+        $("#checkIner").on("touchstart",function(e){
+            $(this).off("touchend");
+            checkTip("正在打卡");
+            if($(this).hasClass("__checking__")){
+                return;
+            }
+            $(this).addClass("__checking__");
+            $(this).on("touchend",function(){
+//                clearTimeout(t);
+                $(this).find(".printer").addClass("on");
+                var ft = setTimeout(function(){
+                    checkTip("打卡完成");
+                    $("#checkIner").removeClass("__checking__");
+                    $("#checkIner").find(".printer").removeClass("on");
+                    setTimeout(function(){
+                        checkInerOut("#checkIner");
+                    },400)
+                },2000);
+            })
+        });
+
     })
 }
+
+function getCity(callback){
+    var geolocation = new BMap.Geolocation(),
+        geoc = new BMap.Geocoder();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var pt = r.point;
+            geoc.getLocation(pt, function(rs){
+                var addComp = rs.addressComponents;
+                if(typeof callback === "function"){
+                    callback(addComp.city)
+                }
+//                alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+            });
+
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true})
+}
+function weather(){
+    getCity(function(city){
+        $.get("http://api.map.baidu.com/telematics/v3/weather",{
+            location:city,
+            output:"json",
+            ak:"2WQAlmlNeRT29pY8vTqCN7kO"
+        },function(a){
+            var temperature = a.results[0].weather_data[0].temperature,
+                weather = a.results[0].weather_data[0].weather;
+            $(".weather img").remove();
+            $(".weather .temperature").html(temperature).fadeIn();
+            $(".weather .text").html(weather).fadeIn();
+
+        },"jsonp")
+    });
+}
+
+/*分页模块*/
+function pageCss(obj){
+    $(obj).css({
+        "left":"0",
+        "top" :"100%"
+    })
+}
+
+function pageIn(obj){
+    $(obj).addClass("on");
+    $(obj).animate({
+        "left":0,
+        "top":0
+    },600,"easeOutBack",function(){
+        fH(".recordListBox");
+        scroll("#wrap1");
+    });
+
+}
+
+
+function pageOut(obj){
+    $(obj).animate({
+        "left":0,
+        "top":"100%"
+    },360,"easeInBack",function(){
+//        scroll(".box");
+    })
+    $(obj).removeClass("on");
+}
+
+$(function(){
+    pageCss("#recordBox");
+    $(".open_detail").on("touchend",function(){
+        pageIn("#recordBox");
+    });
+    $("#recordBox").find(".back").on("touchstart",function(){
+        $(this).off("touchend");
+        $(this).on("touchend",function(){
+            pageOut("#recordBox");
+        })
+    })
+});
+
+$(function(){
+    pageCss("#settingBox");
+    $(".open_setting").on("touchend",function(){
+        pageIn("#settingBox");
+    });
+    $("#settingBox").find(".back").on("touchstart",function(){
+        $(this).off("touchend");
+        $(this).on("touchend",function(){
+            pageOut("#settingBox");
+        })
+    })
+});
+
+$(function(){
+    $(".fMenu").on("touchend",function(){
+//        $(".fMenu .item").length;
+
+        if(!$(this).hasClass("on")){
+            $(this).addClass("on bluring");
+            blur();
+            $(this).css({
+                "z-index":"9"
+            })
+            $(".fMenu .item").each(function(i,o){
+                $(this).fadeIn(0).animate({
+                    "bottom":58*(i+1)
+                },200*i+200>1000?1000:(200*i+200),"easeOutBack");
+            })
+        }else{
+            $(this).removeClass("on bluring");
+            noBlur();
+            $(this).css({
+                "z-index":"1"
+            })
+            $(".fMenu .item").each(function(i,o){
+                $(this).animate({
+                    "bottom":0
+                },100*i+100>1000?1000:(100*i+100),"easeInBack").fadeOut(0);
+            })
+        }
+    })
+});

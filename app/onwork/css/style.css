@@ -2,6 +2,7 @@ body{
     width: 100%;
     height: 100%;
     background: rgb(73, 99, 145);
+    overflow: hidden;
 }
 
 .bg {
@@ -203,6 +204,13 @@ body{
     margin: 0 0 0 4px;
 }
 
+.userCard .userNameWeather .dateWeather .weather img{
+    width: 12px;
+    position: relative;
+    top: 2px;
+    left: 16px;
+}
+
 header .locateNav.myul {
     /* border: 1px solid; */
     height: 70px;
@@ -270,6 +278,7 @@ header .locateNav.myul .myli .text.location {
     color: rgba(255,255,255,.8);
     text-shadow: 0 0 2px rgba(0,0,0,.4);
     font-size: 18px;
+    overflow: hidden;
 }
 
 .userCard .circleWrap .checkInLightShadow {
@@ -280,6 +289,27 @@ header .locateNav.myul .myli .text.location {
     top: 0;
     left: 0;
     box-shadow: inset 0 2px 2px 0 rgba(255,255,255,.4);
+}
+
+.userCard .circleWrap.on .checkIn {
+    background-color: rgba(108, 161, 61, 1);
+    box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    background-image: -webkit-linear-gradient( -90deg, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
+}
+
+.userCard .circleWrap.on .checkInLightShadow {
+    background: none;
+    box-shadow: 0 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.userCard .circleWrap.on {
+    /* background-color: rgba(99, 102, 125, 0); */
+    /* box-shadow: 0 2px 2px 0 rgba(0,0,0,.2); */
+}
+
+.userCard .circleWrap.on .circleWrapLightShadow {
+    /* box-shadow: inset 0 2px 2px 0 rgba(255,255,255,.1); */
 }
 
 /*表格*/
@@ -293,6 +323,7 @@ header .locateNav.myul .myli .text.location {
 .content .header {
     width: 100%;
     position: relative;
+    top: 1px;
     border-bottom: 1px solid rgba(255,255,255,.1);
     height: 32px;
     line-height: 32px;
@@ -305,6 +336,10 @@ header .locateNav.myul .myli .text.location {
 
 .col2 {
     width: 34%;
+}
+
+.col3{
+    width: 39%;
 }
 
 .col.col2 {
@@ -347,7 +382,8 @@ header .locateNav.myul .myli .text.location {
     position: relative;
 }
 
-.box .item .userLogo img {
+.box .item .userLogo img,
+.checkIn img{
     width: 100%;
 }
 
@@ -400,14 +436,418 @@ header .locateNav.myul .myli .text.location {
 }
 
 #checkIner .printBox{
-    width: 30%;
-    height: 30%;
+    width: 35%;
+    height: 35%;
     position: relative;
     margin: 32px auto;
-    -webkit-touch-callout:none;
+    /*-webkit-touch-callout:none;*/
+    background-image: url("../img/printer.png");
+}
+
+#checkIner .printBox .printer{
+    width: 90%;
+    border-top: 1px solid rgba(255,158,149,.4);
+    box-shadow: 0 0 8px rgba(255,158,149,.4);
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 5%;
+    display: none;
+}
+
+#checkIner .printBox .printer.on{
+    display: block;
+    -webkit-animation: scaning 0.5s infinite ease-in-out alternate;
+    -moz-animation: scaning 0.5s infinite ease-in-out alternate;
+    animation: scaning 0.5s infinite ease-in-out alternate;
+}
+
+@-webkit-keyframes scaning{
+    0% {top:10%}
+    100% {top: 90%}
+}
+@-moz-keyframes scaning{
+    0% {top:10%}
+    100% {top: 90%}
+}
+@keyframes scaning{
+    0% {top:10%}
+    100% {top: 90%}
 }
 
 #checkIner .printBox img{
     width: 100%;
 
+}
+
+/*loading*/
+.loading{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 3;
+    opacity: 1;
+}
+
+/*分页*/
+.pageBox {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: fixed;
+    /*top: 0;*/
+    z-index: 2;
+}
+
+div#recordBox {
+    background-color: rgb(247,247,247);
+}
+
+.pageBox header.recordHeader {
+    position: relative;
+    height: 60px;
+    background-color: #fff;
+    line-height: 60px;
+    text-align: center;
+    border-bottom: 1px solid rgb(229,229,229);
+}
+
+.pageBox .back {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    border: 1px solid rgb(127,127,127);
+    top: 16px;
+    left: 14px;
+    text-align: center;
+    line-height: 24px;
+    color: rgb(127,127,127);
+}
+
+.pageBox .arrowDown:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-left: 1px solid;
+    position: relative;
+    top: 5px;
+    margin: 0 auto;
+    border-bottom: 1px solid;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.pageBox header.recordHeader .titleBox {
+    color: rgb(154,154,167);
+    /*vertical-align: sub;*/
+}
+
+.pageBox header.recordHeader .titleBox .text {
+    font-weight: bolder;
+    color: rgb(41,40,67);
+    letter-spacing: 1px ;
+}
+
+.pageBox header.recordHeader .titleBox .title{
+    position: relative;
+    bottom: 2px;
+    font-weight: lighter;
+}
+
+div#recordBox .selectDateBox {
+    height: 86px;
+    position: relative;
+    /*border-bottom: 1px solid;*/
+    margin: 6px 0;
+}
+
+div#recordBox .Date {
+    width: 100%;
+    height: 86px;
+    position: relative;
+}
+
+div#recordBox .Date .wrap {
+    width: 54px;
+    height: 54px;
+    border: 1px solid #c4deff;
+    position: absolute;
+    top: 16px;
+    line-height: 54px;
+    font-size: 16px;
+    color: #fff;
+}
+
+div#recordBox .Date .wrap .text {
+    background-color: #509cff;
+    width: 52px;
+    height: 52px;
+    position: relative;
+    left: 1px;
+    top: 1px;
+}
+
+div#recordBox .Date .dateSelected {
+    display: inline-block;
+    position: absolute;
+    font-size: 12px;
+    top: 40px;
+    color: rgb(200,200,200);
+}
+
+div#recordBox .start.Date {
+}
+
+div#recordBox .Date.start .wrap {
+    left: 12px;
+}
+
+div#recordBox .start.Date .dateSelected {
+    left: 76px;
+}
+
+div#recordBox .end.Date .wrap {
+    right: 12px;
+}
+
+div#recordBox .Date.end .dateSelected {
+    right: 74px;
+}
+
+.pageBox .toolBox {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 158px;
+    bottom: 0;
+    /*border-top: 1px solid rgb(209, 209, 209);*/
+    box-shadow: 0 -2px 4px rgba(0,0,0,.1);
+    padding: 0 0 0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    -webkit-border-top-left-radius: 12px;
+    -webkit-border-top-right-radius: 12px;
+}
+
+.pageBox .resultBox {
+    width: 90%;
+    margin: 10px auto 0;
+    text-align: center;
+    position: relative;
+    height: 48px;
+}
+
+.pageBox .toolBox .changeRangeBox {
+    text-align: center;
+    width: 94%;
+    margin: 0 auto;
+    border: 1px solid rgb(180,180,180);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    height: 38px;
+    line-height: 38px;
+    overflow: hidden;
+    color: rgb(81,81,81);
+}
+
+.pageBox .toolBox .changeRangeBox .tap.on{
+    color:#fff;
+    background-color: rgb(96,195,133);}
+
+.pageBox .toolBox .changeRangeBox .tap:nth-of-type(3n+2) {
+    border-right: 1px solid rgb(180,180,180);
+    border-left: 1px solid rgb(180,180,180);
+}
+
+.pageBox .resultBox .myli {
+    position: relative;
+    /* border: 1px solid; */
+}
+
+.pageBox .resultBox .result {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    background-color: #ff0;
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 4px;
+    left: 10px;
+}
+
+.pageBox .resultBox .text {
+    position: absolute;
+    top: 14px;
+    left: 54px;
+    font-size: 14px;
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n+1) .result {
+    background-color: rgb(251,96,96);
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n+1) .text {
+    color: rgb(251,96,96);
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n+2) .result {
+    background-color: rgb(253,189,15);
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n+2) .text {
+    color: rgb(253,189,15);
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n) .result {
+    background-color: rgb(96,204,211
+    );
+}
+
+.pageBox .resultBox .myli:nth-of-type(3n) .text {
+    color: rgb(96,204,211
+    );
+}
+
+#recordBox .recordListBox {
+    /*background-color: #eee;*/
+    border-top: 1px solid #ddd;
+}
+
+#recordBox .recordListBox .header {
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    color: rgb(173,190,213);
+    position: relative;
+    top: 1px;
+}
+
+#recordBox .recordListBox .header .col:nth-of-type(2n),
+#recordBox .recordListBox .item .col:nth-of-type(2n) {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+#recordBox .recordListBox .wrap{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#recordBox .recordListBox .item:first-child{
+    border-top: 1px solid #ddd;
+}
+#recordBox .recordListBox .item {
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 1px solid #ddd;
+    color:rgb(147,147,147);
+}
+
+/*浮动按钮*/
+.fMenu {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+
+}
+
+.fMenu .header {
+    width: 48px;
+    height: 48px;
+    /* line-height: 48px; */
+    /*font-size: 40px;*/
+    z-index: 3;
+    background-color:  #e75fca;
+    text-align: center;
+    color: #fff;
+    transform:rotate(0);
+    -webkit-transform:rotate(0);
+    position: absolute;
+}
+
+.fMenu .header:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    border-top: 2px solid white;
+    position:absolute;
+    top: 22px;
+    left: 16px;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transition:all 0.4s;
+    transition-timing-function:ease-out;
+    /* Safari and Chrome */
+    -webkit-transition:all 0.4s;
+    -webkit-transition-timing-function:ease-out;
+}
+
+.fMenu .header:after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    border-top: 2px solid white;
+    position:absolute;
+    top: 22px;
+    left: 16px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transition:all 0.4s;
+    transition-timing-function:ease-out;
+    /* Safari and Chrome */
+    -webkit-transition:all 0.4s;
+    -webkit-transition-timing-function:ease-out;
+}
+
+.fMenu .header .text {
+    /* border: 1px solid; */
+    /*line-height: 0;*/
+    /* font-size: 16px; */
+    position: absolute;
+    top: 0px;
+    left: 0;
+    display: none;
+    width: 21px;
+    height: 21px;
+}
+
+.fMenu.on .header:after{
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+}
+
+.fMenu.on .header:before{
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+}
+
+.fMenu .content {
+    width: 100%;
+    position: absolute;
+    height: inherit;
+    overflow: visible;
+    bottom: 0;
+}
+
+.fMenu .content .item {
+    width: 48px;
+    height: 48px;
+    background-color: #e75fca;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    text-align: center;
+    line-height:48px;
+    color:#fff;
+    display:none;
 }
