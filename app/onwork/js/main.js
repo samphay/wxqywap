@@ -358,9 +358,14 @@ function weather(){
             ak:"2WQAlmlNeRT29pY8vTqCN7kO"
         },function(a){
             var temperature = a.results[0].weather_data[0].temperature,
-                weather = a.results[0].weather_data[0].weather;
+                weather = a.results[0].weather_data[0].weather,
+                daypic = a.results[0].weather_data[0].dayPictureUrl,
+                nightpic = a.results[0].weather_data[0].nightPictureUrl,
+                date = a.results[0].weather_data[0].date;
+            date = (date.substr(date.length-4,3));
             $(".weather img").remove();
-            $(".weather .temperature").html(temperature).fadeIn();
+//            $(".weather").html('<img src="'+daypic+'" alt="" style="width:24px;position:absolute;top:24px;left:80px;"/>').fadeIn()
+            $(".weather .temperature").html(date).fadeIn();
             $(".weather .text").html(weather).fadeIn();
 
         },"jsonp")
@@ -375,14 +380,15 @@ function pageCss(obj){
     })
 }
 
-function pageIn(obj){
+function pageIn(obj,callback){
     $(obj).addClass("on");
     $(obj).animate({
         "left":0,
         "top":0
     },600,"easeOutBack",function(){
-        fH(".recordListBox");
-        scroll("#wrap1");
+        if(typeof callback === "function"){
+            callback();
+        }
     });
 
 }
@@ -401,7 +407,13 @@ function pageOut(obj){
 $(function(){
     pageCss("#recordBox");
     $(".open_detail").on("touchend",function(){
-        pageIn("#recordBox");
+        pageIn("#recordBox",function(){
+            if(!$("#wrap1").hasClass("__scrolled__")){
+                $("#wrap1").addClass("__scrolled__");
+                fH(".recordListBox");
+                scroll("#wrap1");
+            }
+        });
     });
     $("#recordBox").find(".back").on("touchstart",function(){
         $(this).off("touchend");
@@ -426,8 +438,6 @@ $(function(){
 
 $(function(){
     $(".fMenu").on("touchend",function(){
-//        $(".fMenu .item").length;
-
         if(!$(this).hasClass("on")){
             $(this).addClass("on bluring");
             blur();
@@ -453,3 +463,134 @@ $(function(){
         }
     })
 });
+
+$(function(){
+    sliderButton({
+        "obj" : ".slideButton",
+        "slider" :".slider",
+        "off" : function(){
+//            alert("off")
+        },
+        "on": function(){
+//            alert("on")
+        }
+    })
+});
+
+function sliderButton(opt){
+
+    $(opt.obj).on("touchend",function(){
+        if($(this).hasClass("on")){
+            $(this).removeClass("on");
+            $(this).children("").removeAttr("style");
+            if(typeof opt.off === "function"){
+                opt.off();
+            }
+        }else{
+            $(this).children("").removeAttr("style");
+            $(this).addClass("on");
+            if(typeof opt.on === "function"){
+                opt.on();
+            }
+        }
+    });
+    /*sensitive(opt.slider,function(a){
+        if(a>30){
+            $(opt.obj).children("").removeAttr("style");
+            $(opt.obj).addClass("on");
+            if(typeof opt.on === "function"){
+                opt.on();
+            }
+        }else{
+            $(opt.obj).children("").removeAttr("style");
+            $(opt.obj).removeClass("on");
+            if(typeof opt.off === "function"){
+                opt.off();
+            }
+        }
+    })*/
+}
+
+function sensitive(sClass,callback){
+    var initP = null,
+        initT = null,
+        initM = null,
+        cx = null,
+        width = null,
+        sliderWidth = null,
+        wm = null,
+        touch = null,
+        setCss = function(aCss){
+            $(".sliderCheckBg").width(aCss+$(sClass).width());
+            $(".slider").css({
+                "left" : aCss
+            })
+        },
+        percent = function(num){
+            return Math.round((num/(width))*100);
+        };
+    $(sClass).on("touchstart mousedown",function(e){
+        document.body.addEventListener('touchmove touchend', function(e) {
+            e.stopPropagation();
+        });
+        e.preventDefault();
+        e.stopPropagation();
+        width = $(".slideButton").width();
+
+        $(this).off("touchend");
+        if(e.type == "touchstart"){
+            initP = window.event.touches[0].pageX;
+            initT = numstr($(this).css("left"));
+            touch = true;
+
+        }
+    });
+    $(sClass).on("touchmove",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.type == "touchmove"){
+            initM = window.event.touches[0].pageX;
+            cx = initM-initP;
+            wm = initT + cx;
+            if(wm>(width -$(sClass).width())){
+                wm = width -$(sClass).width();
+            }else if(wm<0){
+                wm = 0;
+            }
+            if(wm>8&&wm<30){
+                setCss(wm);
+            }else{
+               if(wm!=0&&wm!=34){
+                   $(sClass).width((34));
+               }
+            }
+            touch = true;
+            $(this).on("touchend",function(e){
+                var pwm = percent(wm);
+                e.preventDefault();
+                e.stopPropagation();
+                if(e.type == "touchend"){
+                    if(touch){
+                        touch = false;
+
+                        if(typeof(callback) === "function"){
+                            callback(pwm)
+                        }
+                        return;
+                    }
+                }
+            })
+        }
+    });
+}
+
+/*
+ * 去px,提取数字
+ */
+function numstr(str){
+    if(typeof(str)==="string"){
+        var l = str.length,
+            num = str.substr(0,l-2);
+        return Number(num)
+    }
+}

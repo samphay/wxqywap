@@ -186,7 +186,7 @@ body{
     height: 50px;
     /*border: 1px solid;*/
     position: absolute;
-    top: 28px;
+    top: 24px;
     left: 104px;
 }
 
@@ -197,6 +197,12 @@ body{
 .userCard .userNameWeather .dateWeather {
     margin: 8px 0 0;
     color: rgba(255,255,255,.8);
+}
+
+.userCard .userNameWeather .dateWeather .weather{
+    display: block;
+    white-space: nowrap;
+    margin: 8px 0 0!important;
 }
 
 .userCard .userNameWeather .dateWeather .weather,
@@ -750,6 +756,83 @@ div#recordBox .Date.end .dateSelected {
     border-bottom: 1px solid #ddd;
     color:rgb(147,147,147);
 }
+
+/*设置*/
+#settingBox{
+    background-color: rgb(229,229,229);
+}
+
+.pageBox .settingPageBox {
+    /* padding: 0 16px; */
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+
+.pageBox .settingPageBoxWrap {
+    width: 92%;
+    background-color: #fff;
+    position: absolute;
+    height: 90%;
+    top: 20px;
+    left: 4%;
+    padding: 50px 0 0;
+}
+
+.pageBox .settingItem {
+    width: 86%;
+    /* height: 30px; */
+    /* line-height: 30px; */
+    margin: 16px auto;
+    padding: 10px 0;
+    /* border: 1px solid; */
+    position: relative;
+}
+
+.pageBox .settingItem .title {
+    color: rgb(81,81,81);
+}
+
+.pageBox .settingItem .slideButton {
+    width: 58px;
+    height: 26px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    background-color: rgb(195,195,195);
+    overflow: hidden;
+}
+
+.pageBox .settingItem .slideButton .slider{
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 1px;
+    background-color: #fff;
+    box-shadow: -1px 2px 4px rgba(0,0,0,.3);
+    left: 0;
+}
+
+.pageBox .settingItem .slideButton .sliderCheckBg{
+    background-color: rgb(255,180,0);
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    /* opacity: 0; */
+    height: 100%;
+    position: absolute;
+    width: 0;
+}
+
+.pageBox .settingItem .slideButton.on .sliderCheckBg {
+    width: 100%;
+}
+
+.pageBox .settingItem .slideButton.on .slider {
+    left: 34px;
+}
+
 
 /*浮动按钮*/
 .fMenu {
