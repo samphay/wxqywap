@@ -1,4 +1,4 @@
-(function msgInit(){
+function msgInit(){
 	if(typeof jQuery == "undefined" && typeof Zepto == "undefined"){
 		console.error("本插件msg依赖jQuery，或者zepto,请检查是否在引用本插件之前引用了jQuery库,或者zepto库！");
 		return false;
@@ -88,7 +88,7 @@
 			$(".msg footer div").eq(0).css(msgFooterDivEQ0Css);
 		};		
 	});
-	window.loop = {};
+	/*window.loop = {};
 	loop.alert = {};
 	loop.alert.count = 0;
 	loop.alert.loops = 0;
@@ -107,8 +107,15 @@
 				loop.alert.handle = {};
 			}	
 		}
-	};
-	})();
+	};*/
+};
+
+function desMsg(){
+
+//        alert(123);
+        $("#msgBlur").remove();
+
+}
 
 var msg = {	
 		version : {
@@ -119,6 +126,7 @@ var msg = {
 			}
 		},
 		alert : function(content,handle,okText,speed){
+            msgInit();
 			var alertInit = {
 				0 : handle,
 				1 : okText,
@@ -165,17 +173,7 @@ var msg = {
 				$(".msg .msgContent").html(content);
 				$(".msg .cancelMsg").html(okText);
 			}else{
-				loop.alert.count++;
-				var counts = Number(loop.alert.count);
-				loop.alert.handle[counts] = {
-						"content" : content,
-						"handle" : handle,
-						"okText" : okText,
-						"speed" : speed
-				}
-				// loop.alert.handle[counts] = content+","+handle+","+okText+","+speed;
-				
-				// loop.alert={content,handle,okText,speed};
+
 			}
 			$(".cancelMsg").on("click",function(e){
 				e.stopPropagation();
@@ -183,7 +181,9 @@ var msg = {
 				$("#msgBlur").hide(0);
 				$(".msg .msgContent").html("");
 				$(".msg footer").show();
-				loop.check("alert");			
+                   desMsg();
+//                alert(123)
+//                console.log(desMsg())
 				if(typeof handle === "function"){
 					handle();
 				}
@@ -250,4 +250,4 @@ var msg = {
 			};
 			msg.alert(message,time);
 		}
-	}
+	};

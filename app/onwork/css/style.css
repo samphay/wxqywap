@@ -533,6 +533,18 @@ div#recordBox {
     color: rgb(127,127,127);
 }
 
+.recordHeader .searchRecord {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    border: 1px solid rgb(127,127,127);
+    top: 16px;
+    right: 14px;
+    text-align: center;
+    line-height: 24px;
+    color: rgb(127,127,127);
+}
+
 .pageBox .arrowDown:after {
     content: "";
     width: 8px;
@@ -564,80 +576,6 @@ div#recordBox {
     font-weight: lighter;
 }
 
-div#recordBox .selectDateBox {
-    height: 86px;
-    position: relative;
-    /*border-bottom: 1px solid;*/
-    margin: 6px 0;
-}
-
-div#recordBox .Date {
-    width: 100%;
-    height: 86px;
-    position: relative;
-}
-
-div#recordBox .Date .wrap {
-    width: 54px;
-    height: 54px;
-    border: 1px solid #c4deff;
-    position: absolute;
-    top: 16px;
-    line-height: 54px;
-    font-size: 16px;
-    color: #fff;
-}
-
-div#recordBox .Date .wrap .text {
-    background-color: #509cff;
-    width: 52px;
-    height: 52px;
-    position: relative;
-    left: 1px;
-    top: 1px;
-}
-
-div#recordBox .Date .dateSelected {
-    display: inline-block;
-    position: absolute;
-    font-size: 12px;
-    top: 40px;
-    color: rgb(200,200,200);
-}
-
-div#recordBox .start.Date {
-}
-
-div#recordBox .Date.start .wrap {
-    left: 12px;
-}
-
-div#recordBox .start.Date .dateSelected {
-    left: 76px;
-}
-
-div#recordBox .end.Date .wrap {
-    right: 12px;
-}
-
-div#recordBox .Date.end .dateSelected {
-    right: 74px;
-}
-
-.pageBox .toolBox {
-    background-color: #fff;
-    position: absolute;
-    width: 100%;
-    height: 158px;
-    bottom: 0;
-    /*border-top: 1px solid rgb(209, 209, 209);*/
-    box-shadow: 0 -2px 4px rgba(0,0,0,.1);
-    padding: 0 0 0;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    -webkit-border-top-left-radius: 12px;
-    -webkit-border-top-right-radius: 12px;
-}
 
 .pageBox .resultBox {
     width: 90%;
@@ -647,27 +585,6 @@ div#recordBox .Date.end .dateSelected {
     height: 48px;
 }
 
-.pageBox .toolBox .changeRangeBox {
-    text-align: center;
-    width: 94%;
-    margin: 0 auto;
-    border: 1px solid rgb(180,180,180);
-    border-radius: 12px;
-    -webkit-border-radius: 12px;
-    height: 38px;
-    line-height: 38px;
-    overflow: hidden;
-    color: rgb(81,81,81);
-}
-
-.pageBox .toolBox .changeRangeBox .tap.on{
-    color:#fff;
-    background-color: rgb(96,195,133);}
-
-.pageBox .toolBox .changeRangeBox .tap:nth-of-type(3n+2) {
-    border-right: 1px solid rgb(180,180,180);
-    border-left: 1px solid rgb(180,180,180);
-}
 
 .pageBox .resultBox .myli {
     position: relative;
@@ -719,6 +636,8 @@ div#recordBox .Date.end .dateSelected {
     );
 }
 
+
+
 #recordBox .recordListBox {
     /*background-color: #eee;*/
     border-top: 1px solid #ddd;
@@ -757,6 +676,107 @@ div#recordBox .Date.end .dateSelected {
     color:rgb(147,147,147);
 }
 
+/*选择日期*/
+
+.toolBox {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    height: 158px;
+    bottom: 0;
+    /*border-top: 1px solid rgb(209, 209, 209);*/
+    box-shadow: 0 -2px 4px rgba(0,0,0,.1);
+    padding: 0 0 0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    -webkit-border-top-left-radius: 12px;
+    -webkit-border-top-right-radius: 12px;
+}
+
+
+.toolBox .selectDateBox {
+    height: 86px;
+    position: relative;
+    /*border-bottom: 1px solid;*/
+    margin: 6px 0;
+}
+
+.toolBox .Date {
+    width: 100%;
+    height: 86px;
+    position: relative;
+}
+
+.toolBox .Date .wrap {
+    width: 54px;
+    height: 54px;
+    border: 1px solid #c4deff;
+    position: absolute;
+    top: 16px;
+    line-height: 54px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.toolBox .Date .wrap .text {
+    background-color: #509cff;
+    width: 52px;
+    height: 52px;
+    position: relative;
+    left: 1px;
+    top: 1px;
+}
+
+.toolBox .Date .dateSelected {
+    display: inline-block;
+    position: absolute;
+    font-size: 12px;
+    top: 40px;
+    color: rgb(200,200,200);
+}
+
+.toolBox .start.Date {
+}
+
+.toolBox .Date.start .wrap {
+    left: 12px;
+}
+
+.toolBox .start.Date .dateSelected {
+    left: 76px;
+}
+
+.toolBox .end.Date .wrap {
+    right: 12px;
+}
+
+.toolBox .Date.end .dateSelected {
+    right: 74px;
+}
+
+
+.toolBox .changeRangeBox {
+    text-align: center;
+    width: 94%;
+    margin: 0 auto;
+    border: 1px solid rgb(180,180,180);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    height: 38px;
+    line-height: 38px;
+    overflow: hidden;
+    color: rgb(81,81,81);
+}
+
+.toolBox .changeRangeBox .tap.on{
+    color:#fff;
+    background-color: rgb(96,195,133);}
+
+.toolBox .changeRangeBox .tap:nth-of-type(3n+2) {
+    border-right: 1px solid rgb(180,180,180);
+    border-left: 1px solid rgb(180,180,180);
+}
+
 /*设置*/
 #settingBox{
     background-color: rgb(229,229,229);
@@ -773,7 +793,7 @@ div#recordBox .Date.end .dateSelected {
     width: 92%;
     background-color: #fff;
     position: absolute;
-    height: 90%;
+    height: 80%;
     top: 20px;
     left: 4%;
     padding: 50px 0 0;
@@ -813,6 +833,17 @@ div#recordBox .Date.end .dateSelected {
     background-color: #fff;
     box-shadow: -1px 2px 4px rgba(0,0,0,.3);
     left: 0;
+}
+
+.pageBox .settingItem .slideButton .slider img{
+    width:12px;
+    position:relative;
+    left:6px;
+}
+
+.pageBox .settingItem .slideButton .slider.on {
+    box-shadow: none;
+    opacity: .8;
 }
 
 .pageBox .settingItem .slideButton .sliderCheckBg{
@@ -933,4 +964,8 @@ div#recordBox .Date.end .dateSelected {
     line-height:48px;
     color:#fff;
     display:none;
+}
+
+.dwv{
+    display: none;
 }

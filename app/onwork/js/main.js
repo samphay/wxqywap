@@ -21,9 +21,12 @@ function initOnWork(){
                 return;
             }
             checkInerOut("#checkIner");
-        };
+        }
         if($(".fMenu").hasClass("bluring")){
             $(".fMenu").trigger("touchend");
+        }
+        if($(".toolBox").hasClass("bluring")){
+            $(".searchRecord").trigger("touchend");
         }
     });
 
@@ -404,6 +407,43 @@ function pageOut(obj){
     $(obj).removeClass("on");
 }
 
+function boxCss(obj){
+    $(obj).css({
+        "bottom":0-$(obj).height(),
+        "display":"none",
+        "z-index":"9"
+    })
+}
+
+function boxIn(obj,callback){
+    $(obj).addClass("on").fadeIn(0);
+    blur();
+    $(obj).addClass("bluring");
+    $(obj).animate({
+        "left":0,
+        "bottom":0
+    },600,"easeOutBack",function(){
+        if(typeof callback === "function"){
+            callback();
+        }
+    });
+}
+
+function boxOut(obj,callback){
+    $(obj).removeClass("bluring");
+    $(obj).animate({
+        "left":0,
+        "bottom":-$(obj).height()
+    },400,"easeInBack",function(){
+        $(obj).removeClass("on").fadeOut(0);
+        noBlur();
+        if(typeof callback === "function"){
+            callback();
+        }
+        $(obj).removeClass("on");
+    });
+}
+/*记录列表*/
 $(function(){
     pageCss("#recordBox");
     $(".open_detail").on("touchend",function(){
@@ -423,6 +463,25 @@ $(function(){
     })
 });
 
+/*查询记录*/
+$(function(){
+    $(".searchRecord").on("touchend",function(){
+
+       if($(this).hasClass("on")){
+           $(this).removeClass("on");
+           boxOut(".toolBox")
+       }else{
+           boxCss(".toolBox");
+           boxIn(".toolBox");
+           $(this).css({
+               "z-index":"9"
+           });
+           $(this).addClass("on");
+       }
+    })
+})
+
+/*设置页面*/
 $(function(){
     pageCss("#settingBox");
     $(".open_setting").on("touchend",function(){
@@ -436,6 +495,7 @@ $(function(){
     })
 });
 
+/*浮动按钮*/
 $(function(){
     $(".fMenu").on("touchend",function(){
         if(!$(this).hasClass("on")){
@@ -443,7 +503,7 @@ $(function(){
             blur();
             $(this).css({
                 "z-index":"9"
-            })
+            });
             $(".fMenu .item").each(function(i,o){
                 $(this).fadeIn(0).animate({
                     "bottom":58*(i+1)
@@ -464,54 +524,62 @@ $(function(){
     })
 });
 
+/*滑动开关*/
 $(function(){
     sliderButton({
         "obj" : ".slideButton",
         "slider" :".slider",
-        "off" : function(){
-//            alert("off")
+        "off" : function(THIS){
+            THIS.waitingDone();
         },
-        "on": function(){
-//            alert("on")
+        "on": function(THIS){
+//            $(function(){
+//                console.log(THIS);
+                THIS.waiting();
+//            })
         }
     })
 });
 
 function sliderButton(opt){
-
     $(opt.obj).on("touchend",function(){
+//        $(this).children(".slider").waiting();
         if($(this).hasClass("on")){
             $(this).removeClass("on");
             $(this).children("").removeAttr("style");
+            $(this).children(".slider").removeClass("on");
             if(typeof opt.off === "function"){
-                opt.off();
+                opt.off($(this).children(".slider"));
             }
         }else{
             $(this).children("").removeAttr("style");
             $(this).addClass("on");
+            $(this).children(".slider").addClass("on");
             if(typeof opt.on === "function"){
-                opt.on();
+                opt.on($(this).children(".slider"));
             }
         }
     });
-    /*sensitive(opt.slider,function(a){
+    sliderPress(opt.slider,function(a,THIS){
         if(a>30){
-            $(opt.obj).children("").removeAttr("style");
-            $(opt.obj).addClass("on");
+            $(THIS).parent().children("").removeAttr("style");
+            $(THIS).parent().addClass("on");
+
             if(typeof opt.on === "function"){
-                opt.on();
+                opt.on(THIS);
             }
         }else{
-            $(opt.obj).children("").removeAttr("style");
-            $(opt.obj).removeClass("on");
+            $(THIS).parent().children("").removeAttr("style");
+            $(THIS).parent().removeClass("on");
+            $(THIS).removeClass("on");
             if(typeof opt.off === "function"){
-                opt.off();
+                opt.off(THIS);
             }
         }
-    })*/
+    })
 }
 
-function sensitive(sClass,callback){
+function sliderPress(sClass,callback){
     var initP = null,
         initT = null,
         initM = null,
@@ -520,9 +588,9 @@ function sensitive(sClass,callback){
         sliderWidth = null,
         wm = null,
         touch = null,
-        setCss = function(aCss){
-            $(".sliderCheckBg").width(aCss+$(sClass).width());
-            $(".slider").css({
+        setCss = function(obj,objBg,aCss){
+            $(objBg).width(aCss+$(sClass).width()*1);
+            $(obj).css({
                 "left" : aCss
             })
         },
@@ -536,7 +604,7 @@ function sensitive(sClass,callback){
         e.preventDefault();
         e.stopPropagation();
         width = $(".slideButton").width();
-
+        $(this).addClass("on");
         $(this).off("touchend");
         if(e.type == "touchstart"){
             initP = window.event.touches[0].pageX;
@@ -558,10 +626,10 @@ function sensitive(sClass,callback){
                 wm = 0;
             }
             if(wm>8&&wm<30){
-                setCss(wm);
+                setCss($(this),$(this).parent().children().eq(0),wm);
             }else{
                if(wm!=0&&wm!=34){
-                   $(sClass).width((34));
+                   $(this).width((34));
                }
             }
             touch = true;
@@ -572,9 +640,9 @@ function sensitive(sClass,callback){
                 if(e.type == "touchend"){
                     if(touch){
                         touch = false;
-
+//                        $(this).removeClass("on");
                         if(typeof(callback) === "function"){
-                            callback(pwm)
+                            callback(pwm,$(this));
                         }
                         return;
                     }
@@ -583,6 +651,20 @@ function sensitive(sClass,callback){
         }
     });
 }
+
+(function($){
+    $.fn.waiting = function(callback){
+        var img = '<img class="__waiting__" src="../../common/img/loading.gif" alt="" width="12" style="position: relative;left: 6px;top:4px;font-size: 0px;"/>';
+         $(this).each(function(){
+            $(this).html(img);
+        })
+    }
+    $.fn.waitingDone = function(callback){
+        $(this).each(function(){
+            $(this).find(".__waiting__").remove();
+        })
+    }
+}(jQuery));
 
 /*
  * 去px,提取数字
@@ -594,3 +676,18 @@ function numstr(str){
         return Number(num)
     }
 }
+
+$(function(){
+    $(".Date").mobiscroll().date({
+        theme: 'ios',     // Specify theme like: theme: 'ios' or omit setting to use default
+        mode: 'mixed',       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+        display: 'bottom', // Specify display mode like: display: 'bottom' or omit setting to use default
+        lang: "zh",       // Specify language like: lang: 'pl' or omit setting to use default
+        minDate: new Date(2012,3,10,9,22),  // More info about minDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-minDate
+        maxDate: new Date(2020,7,30,15,44),   // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
+        stepMinute: 1  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
+    });
+    $(document).on("touchend",".dwb0",function(){
+        alert($(".dwv").html())
+    })
+});
