@@ -7,7 +7,7 @@ body{
 
 .bg {
     background-image: -moz-linear-gradient( 90deg, rgb(70,117,177) 0%, rgb(78,74,101) 100%);
-    background-image: -webkit-linear-gradient( top, rgb(70,117,177), rgb(78,74,101));
+    background-image: -webkit-linear-gradient( bottom, rgb(70,117,177), rgb(78,74,101));
     background-image: -ms-linear-gradient( 90deg, rgb(70,117,177) 0%, rgb(78,74,101) 100%);
     background-size: contain;
     background-position: 50%;
@@ -80,6 +80,10 @@ body{
     text-align: center;
     line-height: 46px;
     font-size: 18px;
+}
+
+.timeBox .time .icon-time{
+    margin-right: 6px;
 }
 
 .timeBox .time .point{
@@ -203,18 +207,18 @@ body{
     display: block;
     white-space: nowrap;
     margin: 8px 0 0!important;
+    position: relative;
 }
 
 .userCard .userNameWeather .dateWeather .weather,
 .userCard .userNameWeather .dateWeather .weather .text {
     margin: 0 0 0 4px;
 }
-
 .userCard .userNameWeather .dateWeather .weather img{
     width: 12px;
     position: relative;
     top: 2px;
-    left: 16px;
+    right: 40px;
 }
 
 header .locateNav.myul {
@@ -301,7 +305,7 @@ header .locateNav.myul .myli .text.location {
     background-color: rgba(108, 161, 61, 1);
     box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
     color: rgba(255, 255, 255, 0.8);
-    background-image: -webkit-linear-gradient( -90deg, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
+    background-image: -webkit-linear-gradient( botton, rgba(88,92,102,.2) 0%, rgba(234,234,235,.2) 100%);
 }
 
 .userCard .circleWrap.on .checkInLightShadow {
@@ -333,7 +337,8 @@ header .locateNav.myul .myli .text.location {
     border-bottom: 1px solid rgba(255,255,255,.1);
     height: 32px;
     line-height: 32px;
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.1);
+    color:rgba(0,0,0,.6)
 }
 
 .col1 {
@@ -506,6 +511,7 @@ header .locateNav.myul .myli .text.location {
     position: fixed;
     /*top: 0;*/
     z-index: 2;
+    overflow: hidden;
 }
 
 div#recordBox {
@@ -537,12 +543,24 @@ div#recordBox {
     width: 24px;
     height: 24px;
     position: absolute;
-    border: 1px solid rgb(127,127,127);
+    /* border: 1px solid rgb(127,127,127); */
     top: 16px;
     right: 14px;
     text-align: center;
     line-height: 24px;
     color: rgb(127,127,127);
+}
+
+.pageBox .goBackWrap,
+.pageBox .searchRecordWrap{
+    /*     border: 1px solid red; */
+    padding: 30px;
+    position: absolute;
+    top:0;
+}
+
+.pageBox .searchRecordWrap{
+    right:0;
 }
 
 .pageBox .arrowDown:after {
@@ -664,6 +682,16 @@ div#recordBox {
     width: 100%;
     overflow: hidden;
     position: relative;
+    background-image: url(../img/logo.png);
+    background-position: 50% 20px;
+    background-size: 48px;
+    background-repeat: no-repeat;
+
+}
+
+#recordBox .recordListBox .wrap .scroll{
+    background-color: rgb(247,247,247);
+    min-height: 100.2%;
 }
 
 #recordBox .recordListBox .item:first-child{
@@ -725,6 +753,7 @@ div#recordBox {
     position: relative;
     left: 1px;
     top: 1px;
+    display: block;
 }
 
 .toolBox .Date .dateSelected {
@@ -733,6 +762,7 @@ div#recordBox {
     font-size: 12px;
     top: 40px;
     color: rgb(200,200,200);
+    width: 100px;
 }
 
 .toolBox .start.Date {
@@ -754,6 +784,23 @@ div#recordBox {
     right: 74px;
 }
 
+.toolBox .Date .dateSelected input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    font-size: 14px;
+    color : rgb(159,159,159);
+}
+
+.toolBox .Date .dateSelected input::-webkit-input-placeholder{
+    color:rgb(200,200,200);
+    font-size: 10px;
+}
+
+input#endDate {
+    text-align: right;
+}
 
 .toolBox .changeRangeBox {
     text-align: center;
@@ -799,6 +846,21 @@ div#recordBox {
     padding: 50px 0 0;
 }
 
+.pageBox .settingPageBoxWrap:before{
+    content:"\e605";
+    font-family: "icomoon";
+    color:rgb(213,213,213);
+    width: 120px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    transform:rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    top: 20px;
+    font-size: 30px;
+    left: 10px;
+}
+
 .pageBox .settingItem {
     width: 86%;
     /* height: 30px; */
@@ -807,6 +869,16 @@ div#recordBox {
     padding: 10px 0;
     /* border: 1px solid; */
     position: relative;
+}
+
+.pageBox .settingItem.NEW:after{
+    content: "new";
+    color: rgb(241,46,46);
+    font-size: 10px;
+    font-weight: 600;
+    font-style: italic;
+    position: relative;
+    bottom: 10px;
 }
 
 .pageBox .settingItem .title {
@@ -838,16 +910,17 @@ div#recordBox {
 .pageBox .settingItem .slideButton .slider img{
     width:12px;
     position:relative;
-    left:6px;
+    top:4px;
+    /*left:6px;*/
 }
-
+/*
 .pageBox .settingItem .slideButton .slider.on {
     box-shadow: none;
     opacity: .8;
-}
+}*/
 
 .pageBox .settingItem .slideButton .sliderCheckBg{
-    background-color: rgb(255,180,0);
+    background-color: rgba(255,180,0,0);
     border-radius: 25px;
     -webkit-border-radius: 25px;
     /* opacity: 0; */
@@ -858,6 +931,7 @@ div#recordBox {
 
 .pageBox .settingItem .slideButton.on .sliderCheckBg {
     width: 100%;
+    background-color: rgba(255,180,0,1);
 }
 
 .pageBox .settingItem .slideButton.on .slider {
@@ -886,10 +960,10 @@ div#recordBox {
     color: #fff;
     transform:rotate(0);
     -webkit-transform:rotate(0);
-    position: absolute;
+    position: relative;
 }
 
-.fMenu .header:before {
+.fMenu .header .plus:before {
     content: "";
     display: inline-block;
     width: 18px;
@@ -906,7 +980,7 @@ div#recordBox {
     -webkit-transition-timing-function:ease-out;
 }
 
-.fMenu .header:after {
+.fMenu .header .plus:after {
     content: "";
     display: inline-block;
     width: 18px;
@@ -923,6 +997,12 @@ div#recordBox {
     -webkit-transition-timing-function:ease-out;
 }
 
+.fMenu .header .plus{
+    position: absolute;
+    top: 1px;
+    left: -1px;
+}
+
 .fMenu .header .text {
     /* border: 1px solid; */
     /*line-height: 0;*/
@@ -935,12 +1015,12 @@ div#recordBox {
     height: 21px;
 }
 
-.fMenu.on .header:after{
+.fMenu.on .header .plus:after{
     transform:rotate(-45deg);
     -webkit-transform:rotate(-45deg);
 }
 
-.fMenu.on .header:before{
+.fMenu.on .header .plus:before{
     transform:rotate(45deg);
     -webkit-transform:rotate(45deg);
 }
@@ -961,11 +1041,22 @@ div#recordBox {
     bottom: 0;
     z-index: 2;
     text-align: center;
-    line-height:48px;
+    line-height:54px;
     color:#fff;
     display:none;
 }
 
-.dwv{
-    display: none;
+
+.dateTimeTitle{
+    display: inline-block;
+    width: 66%;
+    height: 38px;
+    line-height: 40px;
+    position: fixed;
+    font-size: 18px;
+    text-align: center;
+    /* border: 1px solid; */
+    margin: 0 auto;
+    left: 64px;
+    color: rgb(81,81,81);
 }

@@ -10,12 +10,15 @@
         <meta name="Keywords" content="万普企业号,企业号,深圳万普科技有限公司,微信企业号">
         <meta name="description" content="深圳万普企业号，专业解决企业问题">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icon.png" />
+        <link rel="apple-touch-startup-image" href="startup.png" media="(device-width: 375px)">
         <meta name="format-detection" content="telphone=no, email=no"/>
         <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
-		<title></title>
+		<title>考勤</title>
 		<link rel="stylesheet" href="../../common/css/wapwei.css">
 		<link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/font/style.css">
         <script src="../../common/plugin/jquery-1.11.1/jquery-1.11.1.min.js"></script>
         <script src="../../common/js/core/sea.js"></script>
         <script src="../../common/js/lib/jquery-easing.js"></script>
@@ -26,7 +29,7 @@
         <script src="js/main.js"></script>
 
     </head>
-    <body class="appBg onwork m">
+    <body class="bg onwork m" ><!--onbeforeunload="return CloseEvent();" onunload="UnLoadEvent()"-->
    <!-- <div class="loading m">
         <div class="loadingLogoWrap circle"></div>
     </div>-->
@@ -34,14 +37,13 @@
                 <div class="timeBox">
                     <div class="wrap">
                         <div class="time">
-                            <span class="hh">--</span><span class="point m">:</span><span class="mm">--</span><span class="point m">:</span><span class="ss">--</span>
+                            <span class="icon-time"></span><span class="hh">--</span><span class="point m">:</span><span class="mm">--</span><span class="point m">:</span><span class="ss">--</span>
                         </div>
                     </div>
                 </div>
                <div class="wrapUserCardBoxLocateNav m">
                    <div class="userCardBox">
                        <div class="userCard">
-
                            <!--用户头像-->
                            <div class="circle userWrap">
                                <div class="circle userLogo ">
@@ -50,25 +52,22 @@
                                </div>
                                <div class="circle userWrapLightShadow"><!--高光--></div>
                            </div>
-
                            <!--用户名及天气-->
                            <div class="userNameWeather">
                                <div class="userName f16">范冰冰</div>
                                <div class="dateWeather f12 ">
                                    <span class="date">2015-05-14</span>
                                    <span class="weather ">
-                                       <!--<img src="../../common/img/loading.gif" alt="" width="12"/>-->
+                                       <!--<span class="weatherLoading"></span>-->
                                        <span class="temperature hide f10">26℃</span>
                                        <span class="text hide f10">天晴</span>
                                    </span>
                                </div>
                            </div>
-
                            <!--打卡-->
                            <div class="circle circleWrap checkWrap">
                                <div class="circle checkIn m">
                                    打卡
-                                   <!--<img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>-->
                                    <div class="circle checkInLightShadow m"><!--高光--></div>
                                </div>
                                <div class="circle circleWrapLightShadow"><!--高光--></div>
@@ -83,7 +82,7 @@
                             <span class="time f16">08:26</span>
                             <span class="text f12">上班</span>
                         </span>
-                           <div class="text location f14">
+                           <div class="text location f12">
                                深圳市西乡宝安大道4004
                            </div>
                        </div>
@@ -92,7 +91,7 @@
                             <span class="time f16">18:26</span>
                             <span class="text f12">下班</span>
                         </span>
-                           <div class="text location f14">
+                           <div class="text location f12">
                                深圳市西乡宝安大道4004
                            </div>
                        </div>
@@ -120,22 +119,153 @@
                             <div class="col col2 textMiddle f16">08:26</div>
                             <div class="col col2 textMiddle f16">18:13</div>
                         </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
+                        <div class="item myul">
+                            <div class="col col1 textMiddle">
+                                <div class="userWrap">
+                                    <div class="circle userLogo">
+                                        <img src="http://www.ttoou.com/qqtouxiang/allimg/120927/co12092FR634-32-lp.jpg" alt=""/>
+                                    </div>
+                                    <div class="border-26 num">1</div>
+                                </div>
+                                <span class="text f12">范冰冰</span>
+                            </div>
+                            <div class="col col2 textMiddle f16">08:26</div>
+                            <div class="col col2 textMiddle f16">18:13</div>
+                        </div>
 
                     </div>
                 </div>
             </div>
     <!--浮动按钮-->
    <div class="fMenu">
-       <div class="header circle m2">
-          <span class="text f20">+</span>
+       <div class="header circle m2 __tapColor__" >
+          <span class="plus"></span>
        </div>
        <div class="content">
-            <div class="item open_detail circle">
-                详
-            </div>
-           <div class="item open_setting circle">
-               设
+           <div class="item open_setting circle __tapColor__">
+               <span class="icon-cog f18"></span>
            </div>
+           <div class="item open_detail circle __tapColor__">
+               <span class="icon-notepad f18"></span>
+           </div>
+
 
        </div>
    </div>
@@ -151,8 +281,9 @@
     <!--打卡记录列表-->
     <div id="recordBox" class="pageBox">
         <header class="recordHeader">
-            <div class="circle back arrowDown">
-
+            <div class="goBackWrap __tapColor__">
+                <div class="circle back arrowDown">
+                </div>
             </div>
             <span class="titleBox">
                 <span class="text f18">
@@ -160,8 +291,10 @@
                 </span>
                 <span class="title f12">/考勤记录</span>
             </span>
-            <div class="circle searchRecord">
-                查
+            <div class="searchRecordWrap __tapColor__">
+                <div class="circle searchRecord">
+                    <span class="icon-calendar f22"></span>
+                </div>
             </div>
         </header>
         <div class="resultBox myul ">
@@ -184,8 +317,6 @@
                 <span class="text">未打卡</span>
             </div>
         </div>
-
-
         <div class="recordListBox">
             <div class="header myul">
                 <div class="col col3 textMiddle">日期</div>
@@ -194,90 +325,6 @@
             </div>
             <div class="wrap" id="wrap1">
                 <div class="scroll">
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
-                    <div class="item myul">
-                        <div class="col col3 textMiddle">
-                            2015-04-16
-                        </div>
-                        <div class="col col1 textMiddle f16">08:26</div>
-                        <div class="col col1 textMiddle f16">18:13</div>
-                    </div>
                     <div class="item myul">
                         <div class="col col3 textMiddle">
                             2015-04-16
@@ -294,40 +341,42 @@
    <div class="toolBox hide">
        <div class="selectDateBox myul ">
            <div class="myli">
-               <div class="start Date">
-                   <div class="circle wrap">
-                       <div class="textMiddle circle text">
+               <div class="start Date __tapColor__">
+                   <label for="startDate" class="circle wrap ">
+                       <span class="textMiddle circle text">
                            开始
-                       </div>
-                   </div>
-                   <div class="dateSelected">
-                       请选择开始时间
+                       </span>
+                   </label>
+                   <div  class="dateSelected">
+                        <input id="startDate" class="selectDate" type="text"  placeholder="请选择开始日期"/>
                    </div>
                </div>
            </div>
            <div class="myli">
-               <div class="end Date">
-                   <div class="circle wrap">
-                       <div class="textMiddle circle text">
+               <div class="end Date __tapColor__">
+                   <label for="endDate" class="circle wrap">
+                       <span class="textMiddle circle text">
                            结束
-                       </div>
-                   </div>
-                   <div class="dateSelected">
-                       请选择结束时间
+                       </span>
+                   </label>
+                   <div  class="dateSelected">
+                         <input id="endDate" readonly class="selectDate" type="text"  placeholder="请选择结束日期"/>
                    </div>
                </div>
            </div>
        </div>
        <div class="changeRangeBox myul">
-           <div class="tap myli textMiddle on">一周</div>
-           <div class="tap myli textMiddle">一个月</div>
-           <div class="tap myli textMiddle">三个月</div>
+           <div class="tap myli textMiddle" check="0">一周</div>
+           <div class="tap myli textMiddle" check="1">一个月</div>
+           <div class="tap myli textMiddle" check="2">三个月</div>
        </div>
    </div>
    <!--设置-->
    <div id="settingBox" class="pageBox">
        <header class="recordHeader">
-           <div class="circle back arrowDown">
+           <div class="goBackWrap __tapColor__">
+               <div class="circle back arrowDown">
+               </div>
            </div>
             <span class="titleBox">
                 <span class="text f18">
@@ -338,43 +387,29 @@
        </header>
        <div class="settingPageBox">
            <div class="settingPageBoxWrap">
-               <div class="settingItem">
-                   <sapn class="title">考勤提醒</sapn>
-                   <div class="slideButton">
-                        <div class="sliderCheckBg m"></div>
-                        <div class="slider border-26 m">
-
+                <div class="scroll">
+                    <div class="settingItem NEW">
+                        <sapn class="title"><span class="icon-alarm"></span> 考勤提醒</sapn>
+                        <div class="slideButton" data-switch="abc-1">
+                            <div class="sliderCheckBg m"></div>
+                            <div class="slider border-26 m"></div>
                         </div>
-                   </div>
-               </div>
-               <div class="settingItem">
-                   <sapn class="title">考勤提醒</sapn>
-                   <div class="slideButton">
-                       <div class="sliderCheckBg m"></div>
-                       <div class="slider border-26 m"></div>
-                   </div>
-               </div>
-               <div class="settingItem">
-                   <sapn class="title">考勤提醒</sapn>
-                   <div class="slideButton">
-                       <div class="sliderCheckBg m"></div>
-                       <div class="slider border-26 m"></div>
-                   </div>
-               </div>
-               <div class="settingItem">
-                   <sapn class="title">考勤提醒</sapn>
-                   <div class="slideButton">
-                       <div class="sliderCheckBg m"></div>
-                       <div class="slider border-26 m"></div>
-                   </div>
-               </div>
-               <div class="settingItem">
-                   <sapn class="title">考勤提醒</sapn>
-                   <div class="slideButton">
-                       <div class="sliderCheckBg m"></div>
-                       <div class="slider border-26 m"></div>
-                   </div>
-               </div>
+                    </div>
+                    <div class="settingItem">
+                        <sapn class="title"><span class="icon-alarm"></span> 考勤提醒</sapn>
+                        <div class="slideButton" data-switch="abc">
+                            <div class="sliderCheckBg m"></div>
+                            <div class="slider border-26 m"></div>
+                        </div>
+                    </div>
+                    <div class="settingItem">
+                        <sapn class="title"><span class="icon-alarm"></span> 考勤提醒</sapn>
+                        <div class="slideButton" data-switch="abc-3">
+                            <div class="sliderCheckBg m"></div>
+                            <div class="slider border-26 m"></div>
+                        </div>
+                    </div>
+                </div>
            </div>
        </div>
    </div>
@@ -383,50 +418,39 @@
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.core.js"></script>
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.js"></script>
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.scroller.js"></script>
-
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.util.datetime.js"></script>
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.datetimebase.js"></script>
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.datetime.js"></script>
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.select.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.listbase.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.image.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.treelist.js"></script>-->
-
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.android.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.android-holo.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.ios-classic.js"></script>-->
     <script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.ios.js"></script>
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.jqm.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.sense-ui.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.frame.wp.js"></script>-->
-
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.android-holo-light.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.wp-light.js"></script>-->
-    <!--<script src="../../common/plugin/mobiscroll-master/js/mobiscroll.mobiscroll-dark.js"></script>-->
-
     <script src="../../common/plugin/mobiscroll-master/js/i18n/mobiscroll.i18n.zh.js"></script>
 
     <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
-    <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.icons.css" rel="stylesheet" type="text/css" />
     <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.android.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.android-holo.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.ios-classic.css" rel="stylesheet" type="text/css" />-->
     <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.ios.css" rel="stylesheet" type="text/css" />
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.jqm.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.sense-ui.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.frame.wp.css" rel="stylesheet" type="text/css" />-->
     <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.android.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.android-holo.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.ios-classic.css" rel="stylesheet" type="text/css" />-->
     <link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.ios.css" rel="stylesheet" type="text/css" />
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.jqm.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.sense-ui.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.image.css" rel="stylesheet" type="text/css" />-->
 
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.wp-light.css" rel="stylesheet" type="text/css" />-->
-    <!--<link href="../../common/plugin/mobiscroll-master/css/mobiscroll.mobiscroll-dark.css" rel="stylesheet" type="text/css" />-->
+<!--    <script language="JavaScript" type="text/javascript">
+        var DispClose = true;
+        function CloseEvent()
+        {
+            if (DispClose)
+            {
+                return "是否离开当前页面?";
+            }
+        }
+        function UnLoadEvent()
+        {
+            DispClose = false;
+//在这里处理关闭页面前的动作
+        }
+    </script>-->
+    <script>
+//        window.addEventListener("history.back",function(){
+//            alert(123)
+//        })
+       /* $(function(){
+            $("body").html(WeixinJSBridge.closeWindow)
+        })*/
+    </script>
 </html>

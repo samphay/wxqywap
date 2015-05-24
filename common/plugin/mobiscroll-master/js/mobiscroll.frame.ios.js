@@ -7,7 +7,7 @@
             rows: 5,
             height: 34,
             minWidth: 55,
-            headerText: true,
+            headerText: false,
             showLabel: false,
             btnWidth: false,
             selectedLineHeight: true,

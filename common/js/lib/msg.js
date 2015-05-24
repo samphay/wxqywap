@@ -19,7 +19,7 @@ function msgInit(){
 		msgCss	= {
 			"position" : "relative",
 		    "width" : "80%",
-		    "margin" : "25% auto",
+		    "margin" : "40% auto",
 		    "border-radius" :" 4px",
 		    "-webkit-border-radius" : "4px",
 		    "overflow" : "hidden",
@@ -195,9 +195,10 @@ var msg = {
 			}	
 		},
 		confirm : function(content,handle,okText){
+            msgInit();
 			var alertInit = {
 				0 : handle,
-				1 : okText,
+				1 : okText
 			},
 				alertAfterInit = {};
 
@@ -233,12 +234,14 @@ var msg = {
 			$(".cancelMsg").on("click",function(e){
 				e.stopPropagation();
 				$("#msgBlur").hide(0);
+                desMsg();
 				$(".msg .msgContent").html("");
 			});
 			$(".confirmMsg").on("click",function(e){
 				e.stopPropagation();				
 				$("#msgBlur").hide(0);
-				$(".msg footer").show();				
+				$(".msg footer").show();
+                desMsg();
 				if(typeof handle === "function"){
 					handle();
 				}

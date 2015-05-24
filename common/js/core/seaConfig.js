@@ -8,6 +8,10 @@ seajs.config({
         test: "common/js/lib/test.js",
         iscroll: "common/js/lib/iscroll.js",
         api : "common/js/lib/api.js",
-        date : "common/js/lib/date.js"
+        date : "common/js/lib/date.js",
+        scrollDate : "common/js/lib/scrollDate.js"
     }
-})
+});
+
+//seajs.use("scrollDate",function(){});
+

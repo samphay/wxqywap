@@ -6,7 +6,7 @@
         clearText: '明确',
         selectedText: '选',
         // Datetime component
-        dateFormat: 'yy/mm/dd',
+        dateFormat: 'yy-mm-dd',
         dateOrder: 'yymmdd',
         dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
         dayNamesShort: ['日', '一', '二', '三', '四', '五', '六'],
